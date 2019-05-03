@@ -129,7 +129,7 @@
     let createScenario = function () {
       // Model of Streets
       const loader = new THREE.FBXLoader();
-      loader.load('3D/scenario.fbx', function (object) {
+      loader.load('3D/scenario2.fbx', function (object) {
 
         object.traverse(function (child) {
           if (child.isMesh) {
@@ -182,6 +182,25 @@
       });
     };
 
+    let dotravelLogo = function () {
+
+      const loader = new THREE.FBXLoader();
+      loader.load('3D/dotravellogo2.fbx', function (object) {
+
+        object.mixer = new THREE.AnimationMixer(object);
+        object.castShadow = true;
+        object.name = "logo";
+        object.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = false;
+            child.receiveShadow = false;
+          }
+        });
+        scene.add(object);
+
+      });
+    };
+
     let createLights = function () {
       let light = new THREE.HemisphereLight(0xECFFFF, 0xFFF7DF, 0.3);
       light.position.set(0, 20000, 0);
@@ -211,6 +230,14 @@
       light.shadow.camera.bottom = -100;
       light.shadow.camera.left = -120;
       light.shadow.camera.right = 120;
+      scene.add(light);
+
+      light = new THREE.PointLight(0xffffff, 1.1, 80);
+      light.position.set(50, 60, -50);
+      scene.add(light);
+      
+      light = new THREE.PointLight(0xffffff, 1.1, 80);
+      light.position.set(100, 60, -50);
       scene.add(light);
     }
 
@@ -258,6 +285,7 @@
       createEnvironment();
       createScenario();
       sagradaFamilia();
+      dotravelLogo();
       createRender();
       createControls();
       setActiveCamera(player.cameras.back);
@@ -270,11 +298,11 @@
 
       //console.log(player.cameras.active);
       /*camera.position.lerp(player.cameras.active.getWorldPosition(new THREE.Vector3()), cameraFade);
-      let pos;
-      pos = player.object.position.clone();
-      pos.y += 60;
-      console.log(pos);
-      camera.lookAt(pos);*/
+       let pos;
+       pos = player.object.position.clone();
+       pos.y += 60;
+       console.log(pos);
+       camera.lookAt(pos);*/
 
     };
 
