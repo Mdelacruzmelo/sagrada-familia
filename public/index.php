@@ -264,9 +264,10 @@
 			createLights();
 			createEnvironment();
 			createScenario();
-			dotravelLogo();
+			//dotravelLogo();
 			createRender();
 			//createControls();
+			
 		};
 
 		let mainLoop = function () {
